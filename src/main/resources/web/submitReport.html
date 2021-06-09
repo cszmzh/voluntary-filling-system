@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>i志愿填报 - 515code</title>
+    <link rel="shortcut icon" href="#"/>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/lib/css/submitReport.css">
+    <link rel="stylesheet" href="static/lib/css/footer.css">
+    <script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1.0, minimum-scale=0.7">
+</head>
+
+<body>
+<div class="container">
+
+    <div id="logo"></div>
+    <div class="page-header" style="margin-top: 10px">
+        <h1>成为我们的一员 <small>JOIN US!</small></h1>
+    </div>
+
+    <div id="content">
+
+        <!--注册内容-->
+        <div id="leftSide">
+            <div id="form">
+
+                <form class="form-horizontal" action="#" method="post">
+                    <div class="form-group">
+                        <label for="stuId" class="control-label">学号</label>
+                        <div class="form-info">
+                            <input type="text" name="stuId" class="form-control" id="stuId" pattern="\S{8,8}"
+                                   required="required" placeholder="请输入8位学号(必填)">
+                        </div>
+                        <div class="tips" id="stuIdTip"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stdName" class="control-label">姓名</label>
+                        <div class="form-info">
+                            <input name="stdName" class="form-control" id="stdName" required="required"
+                                   placeholder="请输入你的姓名(必填)">
+                        </div>
+                        <div class="tips" id="stuNameTip"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="major" class="control-label">所属专业</label>
+                        <div class="select">
+                            <select name="major" id="major">
+                                <option value="">----请选择----</option>
+                            </select>
+                        </div>
+                        <div class="select" style="width: 15%">
+                            <select name="classNum" id="classNum">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                        <div class="tips" id="majorTip"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stdQQ" class="control-label">QQ号</label>
+                        <div class="form-info">
+                            <input type="text" name="stdQQ" class="form-control" id="stdQQ" required="required"
+                                   placeholder="请填写5-11位的QQ号码(必填)">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stdPhone" class="control-label">手机</label>
+                        <div class="form-info">
+                            <input type="text" name="stdPhone" class="form-control" id="stdPhone"
+                                   pattern="1[3578]\d{9,9}" required="required" placeholder="11位手机号(必填)">
+                        </div>
+                        <div class="tips" id="phoneTip"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstOrg" class="control-label">第一志愿</label>
+                        <div class="select">
+                            <select name="firstOrg" id="firstOrg" class="org-plug">
+                                <option value="">----请选择----</option>
+                            </select>
+                        </div>
+                        <div class="select" style="width: 15%">
+                            <select name="firstBra" id="firstBra" class="branch-plug">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstReason" class="control-label">第一志愿申请理由</label>
+                        <div class="form-info">
+                                <textarea id="firstReason" name="firstReason" class="form-control" rows="3"
+                                          placeholder="请输入申请理由(200字内必填)"></textarea><br>
+                        </div>
+                        <div class="tips" id="firstWillTip"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="secondOrg" class="control-label">第二志愿</label>
+                        <div class="select">
+                            <select name="secondOrg" id="secondOrg" class="org-plug">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                        <div class="select" style="width: 15%">
+                            <select name="" id="secondBra" class="branch-plug">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="secondReason" class="control-label">第二志愿申请理由</label>
+                        <div class="form-info">
+                                <textarea id="secondReason" class="form-control" rows="3"
+                                          placeholder="请输入申请理由(200字内选填)"></textarea><br>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="checkbox" id="isAgreeItem" value="true"> 接受调剂
+                    </div>
+
+                    <form action="submit.action">
+                        <p style="margin-top: -5px">
+                            <input type="text" name="kaptcha" id="code" value="" maxlength="4" placeholder="请输入验证码"
+                                   style="font-size: 15px; height: 35px; width: 100px"/>
+                            <img src="" id="changeCode" alt="刷新一下"/>
+                            <a href="javascript:void(0);">看不清?点击图片</a>
+                        </p>
+                        <div class="tips" id="kaptchaError" style="margin-left: 120px;margin-top:0"></div>
+                    </form>
+
+                    <div class="form-group" style="margin-left: 35px">
+                        <div style="margin-left: 33%">
+                            <button type="button" class="btn btn-default" id="regist">点击提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="rightSide">
+            <footer class="footer" style="background-color: #4a4747;position: absolute">
+                <div class="footer-links">
+                    <a target="_blank" rel="noopener noreferrer" href="https://www.515code.com/about">关于我们</a>
+                    <a> | </a>
+                    <a target="_blank" rel="noopener noreferrer" href="https://www.515code.com/policy/">隐私与用户协议</a>
+                    <a> | </a>
+                    <a target="_blank" rel="noopener noreferrer"
+                       href="mailto:798998087@qq.com?subject=关于515code志愿填报系统的建议&body=我有如下建议：">提交建议</a>
+                    <br>
+                    <a target="_blank" rel="noopener noreferrer" href="https://space.bilibili.com/54183978">©2019-2021
+                        By
+                        BA_NANA</a>
+                </div>
+            </footer>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+<script src="static/lib/js/util.js"></script>
+<script src="static/lib/js/config.js"></script>
+<script src="static/lib/js/submitReport.js"></script>
+<script src="static/lib/js/verifyCode.js"></script>
+</html>

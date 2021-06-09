@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>i志愿详情 - 515code</title>
+    <link rel="shortcut icon" href="#"/>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/lib/css/reportDetail.css">
+    <link rel="stylesheet" href="static/lib/css/footer.css">
+    <script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+</head>
+
+<body>
+<div>
+    <!--顶部导航栏-->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://hao.515code.com/" target="_blank">i志愿</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="index">志愿管理<span class="sr-only">(current)</span></a></li>
+                    <li><a href="data">数据分析</a></li>
+                    <li id="authority-tab"><a href="authority">账号管理</a></li>
+                    <li id="major-tab"><a href="major">专业管理</a></li>
+                    <li id="org-tab"><a href="organization">组织管理</a></li>
+                    <li id="branch-tab"><a href="branch">分支管理</a></li>
+                    <li><a href="submitReport" target="_blank">填报</a></li>
+                    <li class="dropdown">
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">关于我们</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle userTab" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false"> <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="logoutButton">注销</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">请妥善保管账号密码</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="page-header">
+                <h1 style="margin-left: 10px">志愿详情 <small>Report Detail</small>
+                    <input type="submit" value="返回" class="btn btn-default pull-right" style="margin-right: 20px"
+                           onclick="javascript:window.history.back()">
+                </h1>
+
+            </div>
+        </div>
+        <div class="row">
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <form class="form-horizontal">
+                    <input type="hidden" name="id" value="${user.id}">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">学号</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static" id="stuId"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">姓名</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static" id="stdName"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="major" class="col-sm-2 control-label">所属专业</label>
+                        <div class="col-sm-10">
+                            <div class="select">
+                                <select name="major" id="major">
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="major" class="col-sm-2 control-label">班级</label>
+                        <div class="col-sm-10">
+                            <div class="select">
+                                <select name="classNum" id="classNum">
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="stdPhone" class="col-sm-2 control-label">手机号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="stdPhone" name="stdPhone" value=""
+                                   placeholder="请输入手机号">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="stdQQ" class="col-sm-2 control-label">QQ号码</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="stdQQ" name="stdQQ" value="798998087"
+                                   placeholder="请输入QQ号">
+                        </div>
+                    </div>
+
+
+                    <div class="tips" id="phoneTip"></div>
+
+                    <div class="form-group firstWill">
+                        <label for="firstOrg" class="col-sm-2 control-label">第一志愿</label>
+                        <div class="col-sm-10">
+                            <div class="select">
+                                <select name="firstOrg" id="firstOrg" class="org-plug">
+                                    <option value="">----请选择----</option>
+                                </select>
+                            </div>
+                            <div class="select">
+                                <select name="firstBra" id="firstBra" class="branch-plug">
+                                    <option value="">----请选择----</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group firstWill">
+                        <label for="firstReason" class="col-sm-2 control-label">第一志愿申请理由</label>
+                        <div class="form-info col-sm-10">
+                                <textarea id="firstReason" name="firstReason" class="form-control" rows="6"
+                                          placeholder="请输入申请理由(200字内必填，不能为空)" maxlength="200"></textarea><br>
+                        </div>
+                        <div class="tips" id="firstWillTip"></div>
+                    </div>
+
+                    <div class="form-group secondWill">
+                        <label for="secondOrg" class="col-sm-2 control-label">第二志愿</label>
+                        <div class="col-sm-10">
+                            <div class="select">
+                                <select name="secondOrg" id="secondOrg" class="org-plug">
+                                    <option value="">----请选择----</option>
+                                </select>
+                            </div>
+                            <div class="select">
+                                <select name="secondBra" id="secondBra" class="branch-plug">
+                                    <option value="">----请选择----</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group secondWill">
+                        <label for="firstReason" class="col-sm-2 control-label">第二志愿申请理由</label>
+                        <div class="form-info col-sm-10">
+                                <textarea id="secondReason" name="secondReason" class="form-control" rows="6"
+                                          placeholder="请输入申请理由(200字内选填，不能为空)" maxlength="200"></textarea><br>
+                        </div>
+                        <div class="tips" id="secondWillTip"></div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="isDispensing" class="col-sm-2 control-label">是否调剂</label>
+                        <div class="col-sm-10">
+                            <div class="select">
+                                <select name="isDispensing" id="isDispensing">
+                                    <option value="1">接受调剂</option>
+                                    <option value="0">不接受调剂</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">志愿创建时间</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static" id="createTime">
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">最后修改时间</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static" id="updateTime">
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">该学生录取状态</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static" id="reportStatus"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="remark" class="col-sm-2 control-label">备注</label>
+                        <div class="col-sm-10">
+                                <textarea id="remark" name="remark" class="form-control" rows="3"
+                                          placeholder="亲爱的面试官，请在此处留下对该学生的面试印象，学生不会看到此内容（300字以内）"
+                                          maxlength="300"></textarea><br>
+                        </div>
+                    </div>
+                    <div class="form-group" style="text-align: center">
+                        <input type="button" value="录取一志愿" class="btn btn-success" id="enrollFirst"
+                               style="margin-top:5px">
+                        <input type="button" value="录取二志愿" class="btn btn-success" id="enrollSecond"
+                               style="margin-top:5px">
+                        <input type="button" value="提交数据更新" class="btn btn-info" id="updateInfo"
+                               style="margin-top:5px">
+                        <input type="button" value="删除本条志愿" class="btn btn-danger" id="deleteReport"
+                               style="margin-top:5px">
+                        <br><br>
+                        <p>注意：修改志愿要提交后再录取</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--底部标签-->
+    <footer class="footer" style="background-color: #4a4747">
+        <div class="footer-links">
+            <a target="_blank" rel="noopener noreferrer" href="https://www.515code.com/about">关于我们</a>
+            <a> | </a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.515code.com/policy/">隐私与用户协议</a>
+            <a> | </a>
+            <a target="_blank" rel="noopener noreferrer"
+               href="mailto:798998087@qq.com?subject=关于515code志愿填报系统的建议&body=我有如下建议：">提交建议</a>
+            <br>
+            <a target="_blank" rel="noopener noreferrer" href="https://space.bilibili.com/54183978">©2019-2021 By
+                BA_NANA</a>
+        </div>
+    </footer>
+
+</div>
+</body>
+</html>
+<script src="static/lib/js/util.js"></script>
+<script src="static/lib/js/config.js"></script>
+<script src="static/lib/js/loginAndLogout.js"></script>
+<script src="static/lib/js/reportDetail.js"></script>
+<script>
+</script>

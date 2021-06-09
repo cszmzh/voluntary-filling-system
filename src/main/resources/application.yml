@@ -1,0 +1,32 @@
+spring:
+  thymeleaf:
+    prefix: classpath:/web/
+    suffix: .html
+    mode: HTML5
+    cache: false
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+  profiles:
+    active: dev
+
+kaptcha:
+  border: "yes"
+  border.color: 105,179,90
+  textproducer:
+    font:
+      color: blue
+      size: 30
+      names: 宋体,楷体,微软雅黑
+    char:
+      length: 4
+  image:
+    width: 120
+    height: 40
+  session:
+    key: code

@@ -1,0 +1,134 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: auto;
+}
+
+.form-info {
+    width: 50%;
+}
+
+#logo {
+    width: 150px;
+    height: 70px;
+    align: center;
+    background: url("../../img/logo-slogan.png") no-repeat;
+    background-size: 150px;
+}
+
+#content {
+    height: auto;
+    width: 100%;
+    position: relative;
+}
+
+#rightSide {
+    width: 400px;
+    height: 550px;
+    left: 50%;
+    margin-left: 40px;
+    background: url("../../img/regist-image.png") no-repeat;
+    position: absolute;
+}
+
+@media screen and (max-width: 850px) {
+    #rightSide {
+        display: none
+    }
+}
+
+
+#leftSide {
+    display: inline-block;
+    width: 50%;
+    height: 850px;
+    position: absolute;
+}
+
+#form {
+    height: 520px;
+    width: 618px;
+    margin-left: 65px;
+}
+
+.gender {
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+
+#genderModule {
+    margin-top: 0;
+    left: 0;
+    height: 30px;
+    width: 500px;
+    position: relative;
+}
+
+#genderTip {
+    left: 200px;
+    top: 7px;
+    position: absolute;
+}
+
+.tips {
+    color: red;
+    font-weight: bold;
+}
+
+.hide {
+    display: none;
+}
+
+
+.select {
+    display: inline-block;
+    width: 25%;
+    position: relative;
+    vertical-align: middle;
+    padding: 0;
+    overflow: hidden;
+    background-color: #fff;
+    color: #555;
+    border: 1px solid #aaa;
+    text-shadow: none;
+    border-radius: 4px;
+    transition: box-shadow 0.25s ease;
+    z-index: 2;
+}
+
+.select:hover {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.select:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-top-color: #ccc;
+    top: 14px;
+    right: 10px;
+    cursor: pointer;
+    z-index: -2;
+}
+
+.select select {
+    cursor: pointer;
+    padding: 6px;
+    width: 100%;
+    border: none;
+    background: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.select select:focus {
+    outline: none;
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>i志愿登录 - 515code</title>
+    <link rel="shortcut icon" href="#"/>
+    <link rel="stylesheet" href="static/lib/css/login.css">
+    <link rel="stylesheet" href="static/lib/css/footer.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+</head>
+
+<body>
+<div id="loginMain">
+    <div id="loginContent">
+
+        <!--logo及信息显示-->
+        <div class="table" style="top:20px;position: relative">
+            <div class="page-header" style="margin-top: 5px">
+                <h1>
+                    <div id="loginLogo"></div>
+                    <small style="left:160px;top:15px;position: absolute">用户名密码登录</small>
+                </h1>
+            </div>
+        </div>
+
+        <!--输入框和登录按钮-->
+        <div id="loginMiddle">
+            <form class="form-horizontal" style="margin-top: 45px">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label"></label>
+                    <div class="input-label">
+                        <input type="text" class="form-control" id="inputEmail3" name="username" placeholder="用户名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label"></label>
+                    <div class="input-label">
+                        <input type="password" class="form-control" id="inputPassword3" name="password"
+                               placeholder="密码">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label style="margin-left: 20%">
+                                <input type="checkbox" id="isUseCookie" name="isUseCookie"> 同意用户协议
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-" style="width: 230px; margin: auto">
+                        <button type="button" id="login" class="btn btn-default loginButton" style="width: 230px">登录
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!--底部导航栏-->
+        <div id="loginBottom">
+            <p><a href="https://www.google.cn/chrome/" target="_blank">推荐使用Chrome游览器</a></p>
+        </div>
+
+        <!--底部标签-->
+        <footer class="footer">
+            <div class="footer-links">
+                <a target="_blank" rel="noopener noreferrer" href="https://www.515code.com/about">关于我们</a>
+                <a> | </a>
+                <a target="_blank" rel="noopener noreferrer" href="https://www.515code.com/policy/">隐私与用户协议</a>
+                <a> | </a>
+                <a target="_blank" rel="noopener noreferrer"
+                   href="mailto:798998087@qq.com?subject=关于515code志愿填报系统的建议&body=我有如下建议：">提交建议</a>
+                <br>
+                <a target="_blank" rel="noopener noreferrer" href="https://space.bilibili.com/54183978">©2019-2021 By
+                    BA_NANA</a>
+            </div>
+        </footer>
+    </div>
+</div>
+</body>
+<script src="static/lib/js/util.js"></script>
+<script src="static/lib/js/config.js"></script>
+<script src="static/lib/js/loginAndLogout.js"></script>
+<script>
+    redirectToIndex();
+    var focus = document.getElementById("login");
+    focus.onkeypress = function (event) {
+        if (event.which === 13) {
+            alert("l")
+        }
+    }
+
+    document.onkeydown = function (e) {
+        // 获取元素
+        var login = document.getElementById("login");
+        var code = e.keyCode
+        // 检测回车键
+        if (code === 13) {
+            var e = document.createEvent("MouseEvents");
+            e.initEvent("click", true, true);
+            login.dispatchEvent(e);
+        }
+    }
+</script>
+</html>

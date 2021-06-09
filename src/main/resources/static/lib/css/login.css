@@ -1,0 +1,73 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+.input-label {
+    width: 230px;
+    margin: auto
+}
+
+
+#loginMain {
+    background: url('https://cdn.jsdelivr.net/gh/BA-NANA/ba-nana.github.io@1.0/assets/img/tjut.jpg') center center;
+    -webkit-background-size: cover;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+}
+
+/*登录框*/
+#loginContent {
+    height: 440px;
+    width: 360px;
+    background-color: white;
+    margin: 0 50%;
+    position: absolute;
+    top: 48%;
+    border: 1px solid #eee;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+}
+
+#loginLogo {
+    margin-left: 20px;
+    width: 120px;
+    height: 50px;
+    background: url("../../img/logo-slogan.png") no-repeat -5px -15px; /*图片左右移动 上下移动*/
+    background-size: 130px;
+}
+
+#loginMiddle {
+    height: 250px;
+    width: 360px;
+    border-bottom: 1px solid #eee;
+}
+
+#loginBottom {
+    left: 0;
+    height: 55px;
+    width: 360px;
+}
+
+#loginBottom p {
+    text-align: center;
+    margin: 15px auto;
+}
+
+#loginBottom a {
+    text-decoration: none;
+    color: black;
+}
+
+#loginBottom a:hover {
+    color: red;
+}

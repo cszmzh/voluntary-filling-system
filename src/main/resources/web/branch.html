@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>i分支管理 - 515code</title>
+    <link rel="shortcut icon" href="#"/>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/lib/css/footer.css">
+    <link rel="stylesheet" href="static/lib/css/reportDetail.css">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
+    <script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+</head>
+
+<body>
+<!--顶部导航栏-->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://hao.515code.com/" target="_blank">i志愿</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="index">志愿管理<span class="sr-only">(current)</span></a></li>
+                <li><a href="data">数据分析</a></li>
+                <li id="authority-tab"><a href="authority">账号管理</a></li>
+                <li id="major-tab"><a href="major">专业管理</a></li>
+                <li id="org-tab"><a href="organization">组织管理</a></li>
+                <li class="active" id="branch-tab"><a href="branch">分支管理</a></li>
+                <li><a href="submitReport" target="_blank">填报</a></li>
+                <li class="dropdown">
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="https://www.515code.com/about" target="_blank">关于我们</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle userTab" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false"> <span class="caret"></span>
+                        &nbsp;
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" class="logoutButton">注销</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">请妥善保管账号密码</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="min-height: calc(100% - 40px)">
+    <div class="page-header">
+        <h1>分支管理 <small>Branch manager</small></h1>
+    </div>
+
+    <div id="toolbar" class="btn-group">
+        <button id="btn_add" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+        </button>
+        <button id="btn_edit" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+        </button>
+        <button id="btn_delete" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+        </button>
+    </div>
+
+    <table id="tb_departments"></table>
+</div>
+</div>
+
+<!--更新模态框-->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     id="updateModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="updateLabel">编辑分支</h4>
+            </div>
+            <div class="modal-body">
+                <form action="" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="update_branchid" class="col-sm-2 control-label">分支编号 (需修改请联系数据库管理员)</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="update_branchid" disabled="disabled"
+                                   placeholder="请输入编号（1-5位数字）">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateOrg" class="col-sm-2 control-label">所属组织</label>
+                        <div class="col-sm-10">
+                            <div class="select">
+                                <select name="belongOrg" id="updateOrg" class="org-plug">
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="update_branchname" class="col-sm-2 control-label">分支名</label>
+                        <div class="col-sm-9">
+                            <input maxlength="20" type="text" class="form-control" id="update_branchname"
+                                   placeholder="请输入分支名（2-20个字符）">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="update_branchdes" class="col-sm-2 control-label">简介</label>
+                        <div class="col-sm-9">
+                            <input maxlength="100" type="text" class="form-control" id="update_branchdes"
+                                   placeholder="请输入简介（100个字符内）">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="update_branchmanager" class="col-sm-2 control-label">负责人</label>
+                        <div class="col-sm-9">
+                            <input maxlength="20" type="text" class="form-control" id="update_branchmanager"
+                                   placeholder="请输入负责人姓名（20个字符内）">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <p class="text-center">Tips：所有信息必填，否则会更新失败。</p>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="closeUpdateModal">关闭</button>
+                <button type="button" class="btn btn-primary" id="update-edit-btn">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--新增模态框-->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     id="createModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">新增分支</h4>
+            </div>
+            <div class="modal-body">
+                <form action="" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="create_branchid" class="col-sm-2 control-label">分支编号</label>
+                        <div class="col-sm-9">
+                            <input maxlength="5" type="text" class="form-control" id="create_branchid"
+                                   placeholder="请输入编号（1-5位数字）">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="createOrg" class="col-sm-2 control-label">所属组织</label>
+                        <div class="col-sm-10">
+                            <div class="select">
+                                <select name="belongOrg" id="createOrg" class="org-plug">
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="create_branchname" class="col-sm-2 control-label">分支名</label>
+                        <div class="col-sm-9">
+                            <input maxlength="20" type="text" class="form-control" id="create_branchname"
+                                   placeholder="请输入分支名（2-20个字符）">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="create_branchdes" class="col-sm-2 control-label">简介</label>
+                        <div class="col-sm-9">
+                            <input maxlength="100" type="text" class="form-control" id="create_branchdes"
+                                   placeholder="请输入简介（100个字符内）">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="create_branchmanager" class="col-sm-2 control-label">负责人</label>
+                        <div class="col-sm-9">
+                            <input maxlength="20" type="text" class="form-control" id="create_branchmanager"
+                                   placeholder="请输入负责人姓名（20个字符内）">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <p class="text-center">Tips：所有信息必填，否则会新增失败。</p>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="closeCreateModal">关闭</button>
+                <button type="button" class="btn btn-primary" id="create-edit-btn">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--底部标签-->
+<footer class="footer" style="background-color: #4a4747">
+    <div class="footer-links">
+        <a target="_blank" rel="noopener noreferrer" href="https://www.515code.com/about">关于我们</a>
+        <a> | </a>
+        <a target="_blank" rel="noopener noreferrer" href="https://www.515code.com/policy/">隐私与用户协议</a>
+        <a> | </a>
+        <a target="_blank" rel="noopener noreferrer"
+           href="mailto:798998087@qq.com?subject=关于515code志愿填报系统的建议&body=我有如下建议：">提交建议</a>
+        <br>
+        <a target="_blank" rel="noopener noreferrer" href="https://space.bilibili.com/54183978">©2019-2021 By
+            BA_NANA</a>
+    </div>
+</footer>
+</body>
+<script src="static/lib/js/config.js"></script>
+<script src="static/lib/js/util.js"></script>
+<script src="static/lib/js/loginAndLogout.js"></script>
+<script src="static/lib/js/branch.js"></script>
+</html>
