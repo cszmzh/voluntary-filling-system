@@ -28,7 +28,7 @@ public class DesUtil {
     /**
      * 加密密码 要大于等于8位
      */
-    private static final String PASSWORD = "k8wCkeOb5t1*PJ0S";
+    private static final String PASSWORD = "k8wCkeCb5t1*PJ0S";
 
     /**
      * 生成key
