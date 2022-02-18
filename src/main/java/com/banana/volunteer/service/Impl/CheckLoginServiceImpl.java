@@ -3,7 +3,7 @@ package com.banana.volunteer.service.Impl;
 import com.banana.volunteer.entity.User;
 import com.banana.volunteer.enums.ResultEnum;
 import com.banana.volunteer.enums.UserStatusEnum;
-import com.banana.volunteer.exception.NoLoginExeption;
+import com.banana.volunteer.exception.NoLoginException;
 import com.banana.volunteer.holder.UserIdHolder;
 import com.banana.volunteer.utils.DesUtil;
 import com.banana.volunteer.utils.RequestAndResponseUtil;
@@ -39,7 +39,7 @@ public class CheckLoginServiceImpl implements CheckLoginService {
                     user = userService.findByUserName(DesUtil.decrypt(cookie.getValue()));
                 } catch (Exception e) {
                     // 解析失败
-                    throw new NoLoginExeption(ResultEnum.LOGIN_ERROR);
+                    throw new NoLoginException(ResultEnum.LOGIN_ERROR);
                 }
 
                 if (user == null) {
@@ -76,7 +76,7 @@ public class CheckLoginServiceImpl implements CheckLoginService {
                     user = userService.findByUserName(DesUtil.decrypt(cookie.getValue()));
                 } catch (Exception e) {
                     // 解析失败
-                    throw new NoLoginExeption(ResultEnum.LOGIN_ERROR);
+                    throw new NoLoginException(ResultEnum.LOGIN_ERROR);
                 }
 
                 if (user == null) {

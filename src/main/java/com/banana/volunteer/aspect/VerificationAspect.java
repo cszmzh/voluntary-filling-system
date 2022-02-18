@@ -1,7 +1,7 @@
 package com.banana.volunteer.aspect;
 
 import com.banana.volunteer.enums.ResultEnum;
-import com.banana.volunteer.exception.NoLoginExeption;
+import com.banana.volunteer.exception.NoLoginException;
 import com.banana.volunteer.holder.UserOrgHolder;
 import com.banana.volunteer.holder.UserStatusHolder;
 import com.banana.volunteer.service.CheckLoginService;
@@ -36,7 +36,7 @@ public class VerificationAspect {
     public Object verification_ADMIN(ProceedingJoinPoint joinPoint) throws Throwable {
         //如果没有登录 这里要抛出异常
         if (!checkLoginService.verification_ADMIN()) {
-            throw new NoLoginExeption(ResultEnum.LOGIN_ERROR);
+            throw new NoLoginException(ResultEnum.LOGIN_ERROR);
         }
         Object obj = joinPoint.proceed();
         UserStatusHolder.remove();
@@ -51,7 +51,7 @@ public class VerificationAspect {
     public Object verification_ROOT(ProceedingJoinPoint joinPoint) throws Throwable {
         // 如果没有登录 这里要抛出异常
         if (!checkLoginService.verification_ROOT()) {
-            throw new NoLoginExeption(ResultEnum.LOGIN_ERROR);
+            throw new NoLoginException(ResultEnum.LOGIN_ERROR);
         }
         Object obj = joinPoint.proceed();
         UserStatusHolder.remove();
