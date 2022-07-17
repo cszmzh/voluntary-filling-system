@@ -1,6 +1,6 @@
 .select {
     display: inline-block;
-    width: 40%;
+    width: 44%;
     position: relative;
     vertical-align: middle;
     padding: 0;
@@ -32,16 +32,18 @@
     border: 6px solid transparent;
     border-top-color: #ccc;
     top: 14px;
-    right: 10px;
+    right: 6px;
     cursor: pointer;
     z-index: -2;
 }
 
 .select select {
     cursor: pointer;
-    padding: 6px;
+    padding: 6px 22px 6px 12px;
     width: 100%;
     border: none;
+    overflow-x: hidden !important;
+    text-overflow: ellipsis;
     background: transparent;
     -webkit-appearance: none;
     -moz-appearance: none;

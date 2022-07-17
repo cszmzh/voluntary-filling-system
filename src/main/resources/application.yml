@@ -13,7 +13,7 @@ spring:
     hibernate:
       ddl-auto: update
   profiles:
-    active: dev
+    active: prod
 
 kaptcha:
   border: "yes"

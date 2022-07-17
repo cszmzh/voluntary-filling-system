@@ -88,7 +88,7 @@ html, body {
 
 .select {
     display: inline-block;
-    width: 25%;
+    width: 28%;
     position: relative;
     vertical-align: middle;
     padding: 0;
@@ -114,21 +114,27 @@ html, body {
     border: 6px solid transparent;
     border-top-color: #ccc;
     top: 14px;
-    right: 10px;
+    right: 6px;
     cursor: pointer;
     z-index: -2;
 }
 
 .select select {
     cursor: pointer;
-    padding: 6px;
+    padding: 6px 22px 6px 12px;
     width: 100%;
     border: none;
     background: transparent;
+    overflow-x: hidden !important;
+    text-overflow: ellipsis;
     -webkit-appearance: none;
     -moz-appearance: none;
 }
 
 .select select:focus {
     outline: none;
+}
+
+option {
+    width: 100%;
 }
