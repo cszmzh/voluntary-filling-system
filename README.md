@@ -3,19 +3,21 @@
 
 [项目Demo体验](https://www.515code.com/posts/t6po20qr/)
 
-这是一个大学生社团或组织的新生志愿填报管理系统，后端使用SpringBoot开发，前端使用HTML5/CSS/JavaScript，数据库使用MySQL。
+这是一个大学生社团或组织的新生志愿填报管理系统，后端使用 SpringBoot 开发，前端使用 HTML5 / CSS / JavaScript，数据库使用 MySQL。
 
 它功能齐全，界面美观（至少我这样认为），你可以将它用于课程设计、开发学习等。
 
 具体开发环境：IntelliJ IDEA 2020.2.3 / JDK 1.8.0_181 / MySQL 5.7.32 / SpringBoot 2.3.3 / Tomcat 8.6.5
 
-为了部署方便，我将项目原型合并成了一个SpringBoot项目（加入了Thymeleaf模板，实质上还是前后端分离的，有必要可以自己拆分出来）。
+为了部署方便，我将项目原型合并成了一个 SpringBoot 项目（加入了 Thymeleaf 模板，实质上还是前后端分离的，有必要可以自己拆分出来）。
 
 ## 二. 数据库设计
 
-运行项目前，请按顺序创建表。
+先在 Navicat 中新建数据库：`volunteer`，Character Set 选择 `utf8mb4`，Collation 选择 `utf8mb4_general_ci`
 
-1.专业表(major)
+运行项目前，**请按顺序创建表**。
+
+1.专业表 (major)
 
 ```sql
 CREATE TABLE `major` (
@@ -26,7 +28,7 @@ CREATE TABLE `major` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 
-2.组织表(organization)
+2.组织表 (organization)
 
 ````sql
 CREATE TABLE `organization` (
@@ -38,7 +40,7 @@ CREATE TABLE `organization` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ````
 
-3.分支表(branch)
+3.分支表 (branch)
 
 ```sql
 CREATE TABLE `branch` (
@@ -53,7 +55,7 @@ CREATE TABLE `branch` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 
-4.学生表(student)
+4.学生表 (student)
 
 ```sql
 CREATE TABLE `student` (
@@ -72,7 +74,7 @@ CREATE TABLE `student` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 
-5.志愿表(report)
+5.志愿表 (report)
 
 ```sql
 CREATE TABLE `report` (
@@ -97,7 +99,7 @@ CREATE TABLE `report` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 
-6.用户表(user)
+6.用户表 (user)
 
 ```sql
 CREATE TABLE `user` (
@@ -115,48 +117,22 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 ```
 
-7.志愿视图
+7.志愿视图 (report_view)
+
+在 Navicat 中选择 volunteer 数据库，在 Views 中用以下 SQL 新建视图：
 
 ```sql
-SELECT
-`a`.`stu_id` AS `stu_id`,
-`a`.`stu_name` AS `stu_name`,
-`b`.`major_name` AS `major_name`,
-`a`.`stu_class` AS `stu_class`,
-`a`.`stu_phone` AS `stu_phone`,
-`a`.`stu_qq` AS `stu_qq`,
-`e`.`org_name` AS `org_first`,
-`d`.`branch_name` AS `bra_first`,
-`g`.`org_name` AS `org_second`,
-`f`.`branch_name` AS `bra_second`,
-`c`.`reason_first` AS `reason_first`,
-`c`.`reason_second` AS `reason_second`,
-`c`.`is_dispensing` AS `is_dispensing`,
-`c`.`status` AS `status`,
-`c`.`update_time` AS `update_time`,
-`c`.`create_time` AS `create_time`,
-`c`.`remark` AS `remark` 
-FROM
-	((((((
-							`student` `a`
-							LEFT JOIN `major` `b` ON ((
-									`a`.`major_id` = `b`.`major_id` 
-								)))
-						LEFT JOIN `report` `c` ON ((
-								`a`.`stu_id` = `c`.`student_id` 
-							)))
-					LEFT JOIN `branch` `d` ON ((
-							`c`.`vol_first` = `d`.`branch_id` 
-						)))
-				LEFT JOIN `organization` `e` ON ((
-						`d`.`org_id` = `e`.`org_id` 
-					)))
-			LEFT JOIN `branch` `f` ON ((
-					`c`.`vol_second` = `f`.`branch_id` 
-				)))
-		LEFT JOIN `organization` `g` ON ((
-			`f`.`org_id` = `g`.`org_id` 
-	)))
+SELECT `a`.`stu_id` AS `stu_id`, `a`.`stu_name` AS `stu_name`, `b`.`major_name` AS `major_name`, `a`.`stu_class` AS `stu_class`, `a`.`stu_phone` AS `stu_phone`
+	, `a`.`stu_qq` AS `stu_qq`, `e`.`org_name` AS `org_first`, `d`.`branch_name` AS `bra_first`, `g`.`org_name` AS `org_second`, `f`.`branch_name` AS `bra_second`
+	, `c`.`reason_first` AS `reason_first`, `c`.`reason_second` AS `reason_second`, `c`.`is_dispensing` AS `is_dispensing`, `c`.`status` AS `status`, `c`.`update_time` AS `update_time`
+	, `c`.`create_time` AS `create_time`, `c`.`remark` AS `remark`
+FROM `student` `a`
+	LEFT JOIN `major` `b` ON `a`.`major_id` = `b`.`major_id`
+	LEFT JOIN `report` `c` ON `a`.`stu_id` = `c`.`student_id`
+	LEFT JOIN `branch` `d` ON `c`.`vol_first` = `d`.`branch_id`
+	LEFT JOIN `organization` `e` ON `d`.`org_id` = `e`.`org_id`
+	LEFT JOIN `branch` `f` ON `c`.`vol_second` = `f`.`branch_id`
+	LEFT JOIN `organization` `g` ON `f`.`org_id` = `g`.`org_id`
 ```
 
 ## 三. API接口
@@ -165,22 +141,23 @@ FROM
 
 ## 四. 目录结构
 
-后端文件 src->main->java
+后端文件 src -> main -> java
 
-前端文件 src->main->resources->web/static
+前端文件 src -> main -> resources -> web/static
 
-配置文件 src->main->resources->application.yml
+配置文件 src -> main -> resources -> application.yml
 
 ## 五. 使用方法
 
-① 添加数据到数据库中（执行sql文件夹中的脚本）。
+1.添加数据到数据库中（执行sql文件夹中的脚本）。
 
-② 在application.yml中配置好相应的数据库信息。
+2.在 application.yml 中配置好相应的数据库信息。
 
-③ 启动项目。
+3.启动项目。
 
 ## 六. 注意事项
 
-① 每添加一个HTML界面，要在PageController中添加相应接口。项目代码可能存在不规范问题（毕竟只是一个信息系统设计），欢迎留言讨论。
+1.每添加一个 HTML 界面，要在 PageController 中添加相应接口。项目代码可能存在不规范问题（毕竟只是一个信息系统设计），欢迎留言讨论。
 
-② 项目中存在部分在线引用css/js等文件，若失效则手动替换链接即可。
+2.项目中存在部分在线引用 CSS / JS 等文件，若失效则手动替换链接即可。
+

@@ -1,12 +1,12 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://39.97.107.13:3306/volunteer_new?characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
-    password: tjut20185584
+    url: jdbc:mysql://127.0.0.1:3306/volunteer?characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+    password: 1234567890
 
 server:
-  port: 8082
+  port: 9700
 
-#logging:
-#  file:
-#    name: logback-spring.xml
+logging:
+  file:
+    name: logback-spring.xml
